@@ -4,3 +4,7 @@ export { Container } from "./container";
 export { Title } from "./title";
 export { SortPopup } from "./sort-popup";
 export { TopBar } from "./top-bar";
+export { Filters } from "./filters";
+export { FilterCheckBox } from "./filter-checkbox";
+export { RangeSlider } from "./range-slider";
+export { CheckboxFiltersGroup } from "./checkbox-filters-group";

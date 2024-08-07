@@ -1,5 +1,4 @@
-import { Container, Title, TopBar } from "@/components/shared";
-import { Button } from "@/components/ui/button";
+import { Container, Filters, Title, TopBar } from "@/components/shared";
 
 export default function Home() {
   return (
@@ -10,6 +9,18 @@ export default function Home() {
         </Title>
       </Container>
       <TopBar />
+      <Container className="mt-10 pb-14">
+        <div className="flex gap-[60px]">
+          {/* FILTERS */}
+          <div className="w-[250px]">
+            <Filters />
+          </div>
+          {/* PRODUCTS */}
+          <div className="flex-1">
+            <div className="flex flex-col gap-16">Product list</div>
+          </div>
+        </div>
+      </Container>
     </>
   );
 }
