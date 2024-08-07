@@ -1,15 +1,14 @@
-import clsx from "clsx";
-import React from "react";
+import { cn } from "@/lib/utils";
+import React, { PropsWithChildren } from "react";
 
 type TitleSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
-interface Props {
+interface Props extends PropsWithChildren {
   size?: TitleSize;
   className?: string;
-  text: string;
 }
 
-export function Title({ size = "sm", className, text }: Props) {
+export function Title({ size = "sm", className, children }: Props) {
   const mapTagBySize = {
     xs: "h1",
     sm: "h2",
@@ -30,7 +29,7 @@ export function Title({ size = "sm", className, text }: Props) {
 
   return React.createElement(
     mapTagBySize[size],
-    { className: clsx(mapClassNameBySize[size], className) },
-    text
+    { className: cn(mapClassNameBySize[size], className) },
+    children
   );
 }
