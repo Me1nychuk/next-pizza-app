@@ -26,15 +26,15 @@ export const CheckboxFiltersGroup = ({
   className,
 }: Props) => {
   const [showAll, setShowAll] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchValue, setSearchValue] = React.useState("");
 
   const filteredItems = items.filter((item) =>
-    item.text.toLowerCase().includes(searchTerm.toLowerCase())
+    item.text.toLowerCase().includes(searchValue.toLowerCase())
   );
   const list = showAll ? filteredItems : defaultItems.slice(0, limit);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
   };
 
   return (
@@ -45,9 +45,9 @@ export const CheckboxFiltersGroup = ({
         {showAll && (
           <div className="mb-5">
             <Input
+              onChange={onChangeSearchInput}
               placeholder={searchInputPlaceholder}
               className="bg-gray-50 border-none"
-              onChange={handleSearchChange}
             />
           </div>
         )}
@@ -60,7 +60,7 @@ export const CheckboxFiltersGroup = ({
               text={item.text}
               endAdornment={item.endAdornment}
               checked={false}
-              onCheckedChange={(str) => console.log(str)}
+              onCheckedChange={() => console.log("clicked")}
             />
           ))}
         </div>

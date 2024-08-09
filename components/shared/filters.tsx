@@ -51,13 +51,7 @@ export const Filters = ({ className }: Props) => {
               max={1500}
               defaultValue={0}
             />
-            <Input
-              type="number"
-              placeholder="0"
-              min={0}
-              max={1500}
-              value={1200}
-            />
+            <Input type="number" placeholder="0" min={0} max={1500} />
           </div>
 
           <RangeSlider min={0} max={1500} step={10} value={[0, 1500]} />
