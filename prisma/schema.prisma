@@ -9,11 +9,13 @@ datasource db  {
 }
 
 model User {
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
 
     fullname     String   
     email        String   @unique
     password     String
+
+    verified   DateTime
     
     role UserRole @default(USER)
 
@@ -34,26 +36,26 @@ model User {
 
 
 model Category{
-    id           String   @id @default(uuid())
+    id           Int   @id @default(autoincrement())
     name String  @unique
     products Product[]
 
 
 
-     createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
 model Product {
-    id           String   @id @default(uuid())
+    id           Int   @id @default(autoincrement())
     
     name String
     imageUrl String
 
     category Category @relation(fields: [categoryId],references: [id])
-    categoryId String
+    categoryId Int
 
-    ingrediens Ingredient[]
+    ingredients  Ingredient[]
 
     items ProductItem[]
 
@@ -63,7 +65,7 @@ model Product {
 }
 
 model ProductItem{
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
     
     price Int
     size Int?
@@ -72,7 +74,7 @@ model ProductItem{
     cartItems CartItem[]
 
     product Product @relation(fields: [productId],references: [id])
-    productId String
+    productId Int
 
 
 
@@ -81,7 +83,7 @@ model ProductItem{
 }
 
 model Ingredient{
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
  
     name String
     price Int
@@ -96,14 +98,14 @@ model Ingredient{
 }
 
 model Cart{
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
     
     user User? @relation(fields: [userId],references: [id])
-    userId String?  @unique
+    userId Int?  @unique
 
     items CartItem[]
 
-    totalAmout Int @default(0)
+    totalAmount Int @default(0)
 
     token String
 
@@ -112,13 +114,13 @@ model Cart{
 }
 
 model CartItem{
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
 
     cart Cart @relation(fields: [cartId], references: [id]) 
-    cartId String   
+    cartId Int   
     
     product ProductItem @relation(fields: [productItemId], references: [id]) 
-    productItemId String   
+    productItemId Int   
 
     quantity Int 
 
@@ -129,10 +131,10 @@ model CartItem{
 }
 
 model Order{
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
     
     user User? @relation(fields: [userId],references: [id])
-    userId String?  
+    userId Int?  
 
     token String 
 
@@ -153,10 +155,10 @@ model Order{
 }
 
 model VerificationCode {
-    id           String   @id @default(uuid())
+      id           Int   @id @default(autoincrement())
     
     user User? @relation(fields: [userId],references: [id])
-    userId String @unique  
+    userId Int @unique  
 
     code String
    
