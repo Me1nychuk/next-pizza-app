@@ -22,6 +22,12 @@ export const SearchInput = ({ className }: SearchInputProps) => {
     setFocused(false);
   });
 
+  const onClickItem = () => {
+    setFocused(false);
+    setSearchQuery("");
+    setProducts([]);
+  };
+
   useDebounce(
     () => {
       const getData = async () => {
@@ -67,7 +73,11 @@ export const SearchInput = ({ className }: SearchInputProps) => {
             )}
           >
             {products.map((product) => (
-              <Link href={`/products/${product.id}`} key={product.id}>
+              <Link
+                href={`/products/${product.id}`}
+                key={product.id}
+                onClick={onClickItem}
+              >
                 <div className=" flex items-center gap-3 px-3 py-2 hover:bg-primary/10 ">
                   <Image
                     src={product.imageUrl}
