@@ -31,8 +31,13 @@ export const SearchInput = ({ className }: SearchInputProps) => {
   useDebounce(
     () => {
       const getData = async () => {
-        const res = await Api.products.search(searchQuery);
-        setProducts(res);
+        try {
+          const res = await Api.products.search(searchQuery);
+          setProducts(res);
+        } catch (error) {
+          console.log(error);
+          setProducts([]);
+        }
       };
 
       getData();
