@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FilterCheckBoxProps, FilterCheckBox } from "./filter-checkbox";
-import { Input } from "../ui";
+import { Input, Skeleton } from "../ui";
 
 type Item = FilterCheckBoxProps;
 interface Props {
@@ -10,9 +10,12 @@ interface Props {
   items: Item[];
   defaultItems: Item[];
   limit?: number;
+  loading?: boolean;
   searchInputPlaceholder?: string;
-  onChange?: (value: string[]) => void;
+  onClickCheckbox?: (value: string) => void;
   defaultValue?: string;
+  selectedIds?: Set<string>;
+  name?: string;
   className?: string;
 }
 export const CheckboxFiltersGroup = ({
@@ -21,9 +24,12 @@ export const CheckboxFiltersGroup = ({
   defaultItems,
   limit = 5,
   searchInputPlaceholder = "Пошук..",
-  onChange,
+  onClickCheckbox,
+  loading = true,
   defaultValue,
+  selectedIds,
   className,
+  name,
 }: Props) => {
   const [showAll, setShowAll] = useState(false);
   const [searchValue, setSearchValue] = React.useState("");
@@ -31,6 +37,23 @@ export const CheckboxFiltersGroup = ({
   const filteredItems = items.filter((item) =>
     item.text.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  if (loading) {
+    return (
+      <div className={className}>
+        <p className="text-base font-bold mb-3">{title}:</p>
+        {
+          <>
+            {[...Array(limit)].map((_, i) => (
+              <Skeleton className="mb-3.5 h-6 rounded-[8px]" key={i} />
+            ))}
+            <Skeleton className="mb-3.5 h-6 w-[115px] rounded-[8px]" />
+          </>
+        }
+      </div>
+    );
+  }
+
   const list = showAll ? filteredItems : defaultItems.slice(0, limit);
 
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,10 +82,14 @@ export const CheckboxFiltersGroup = ({
               value={item.value}
               text={item.text}
               endAdornment={item.endAdornment}
-              checked={false}
-              onCheckedChange={() => console.log("clicked")}
+              checked={selectedIds?.has(item.value)}
+              onCheckedChange={() => onClickCheckbox?.(item.value)}
+              name={name}
             />
           ))}
+          {list.length === 0 && (
+            <p className="text-center">Нічого не знайдено</p>
+          )}
         </div>
 
         {items.length > limit && (

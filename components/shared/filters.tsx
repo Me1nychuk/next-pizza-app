@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   CheckboxFiltersGroup,
@@ -6,38 +8,33 @@ import {
   Title,
 } from "@/components/shared";
 import { Input } from "../ui";
+import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 
 interface Props {
   className?: string;
 }
 
-const pizzaIngredients = [
-  { text: "Пепероні", value: "pepperoni" },
-  { text: "Шинка", value: "ham" },
-  { text: "Гриби", value: "mushrooms" },
-  { text: "Паприка", value: "bell_peppers" },
-  { text: "Оливки", value: "olives" },
-  { text: "Цибуля", value: "onions" },
-  { text: "Часник", value: "garlic" },
-  { text: "Томати", value: "tomatoes" },
-  { text: "Сир моцарела", value: "mozzarella" },
-  { text: "Чеддер", value: "cheddar" },
-  { text: "Рикота", value: "ricotta" },
-  { text: "Бекон", value: "bacon" },
-  { text: "Курка", value: "chicken" },
-  { text: "Анчоуси", value: "anchovies" },
-  { text: "Артишоки", value: "artichokes" },
-];
-
 export const Filters = ({ className }: Props) => {
+  const {
+    ingredients: basicIngredients,
+    loading: loadingIngredients,
+    selectedIds,
+    onToggleId,
+  } = useFilterIngredients();
+
+  const ingredients = basicIngredients.map((ingredient) => ({
+    text: ingredient.name,
+    value: String(ingredient.id),
+  }));
+
   return (
     <>
       <div className={className}>
         <Title className="font-bold mb-5">Фільтрація</Title>
         {/* top checkboxes */}
         <div className="flex flex-col gap-4">
-          <FilterCheckBox value="1" text="Можна збирати" />
-          <FilterCheckBox value="2" text="Новинки" />
+          <FilterCheckBox name="dfd" value="1" text="Можна збирати" />
+          <FilterCheckBox name="dfa" value="2" text="Новинки" />
         </div>
 
         {/* Price filter */}
@@ -62,8 +59,13 @@ export const Filters = ({ className }: Props) => {
         <CheckboxFiltersGroup
           className="mt-10"
           title="Інгредієнти"
-          defaultItems={pizzaIngredients.slice(0, 5)}
-          items={pizzaIngredients}
+          defaultItems={ingredients.slice(0, 6)}
+          limit={6}
+          items={ingredients}
+          loading={loadingIngredients}
+          selectedIds={selectedIds}
+          onClickCheckbox={onToggleId}
+          name="ingredients"
         />
       </div>
     </>
