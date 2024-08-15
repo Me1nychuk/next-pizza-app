@@ -9,6 +9,7 @@ import {
 } from "@/components/shared";
 import { Input } from "../ui";
 import { useFilterIngredients } from "@/hooks/useFilterIngredients";
+import { useSet } from "react-use";
 
 interface Props {
   className?: string;
@@ -22,7 +23,7 @@ export const Filters = ({ className }: Props) => {
   const {
     ingredients: basicIngredients,
     loading: loadingIngredients,
-    selectedIds,
+    selectedIngredients,
     onToggleId,
   } = useFilterIngredients();
 
@@ -30,6 +31,9 @@ export const Filters = ({ className }: Props) => {
     priceFrom: 0,
     priceTo: 1500,
   });
+
+  const [sizes, { toggle: toggleSize }] = useSet(new Set<string>([]));
+  const [pizzaTypes, { toggle: toggleType }] = useSet(new Set<string>([]));
 
   const ingredients = basicIngredients.map((ingredient) => ({
     text: ingredient.name,
@@ -43,15 +47,27 @@ export const Filters = ({ className }: Props) => {
     }));
   };
 
+  React.useEffect(() => {
+    console.log(sizes, price, selectedIngredients, pizzaTypes);
+  }, [sizes, price, selectedIngredients, pizzaTypes]);
   return (
     <>
       <div className={className}>
         <Title className="font-bold mb-5">Фільтрація</Title>
         {/* top checkboxes */}
-        <div className="flex flex-col gap-4">
-          <FilterCheckBox name="dfd" value="1" text="Можна збирати" />
-          <FilterCheckBox name="dfa" value="2" text="Новинки" />
-        </div>
+
+        <CheckboxFiltersGroup
+          className="mb-5"
+          title="Розміри"
+          items={[
+            { text: "20 см", value: "20" },
+            { text: "30 см", value: "30" },
+            { text: "40 см", value: "40" },
+          ]}
+          selected={sizes}
+          onClickCheckbox={toggleSize}
+          name="sizes"
+        />
 
         {/* Price filter */}
         <div className="mt-6 border-y border-y-neutral-100 pt-6 pb-7">
@@ -97,9 +113,22 @@ export const Filters = ({ className }: Props) => {
           limit={6}
           items={ingredients}
           loading={loadingIngredients}
-          selectedIds={selectedIds}
+          selected={selectedIngredients}
           onClickCheckbox={onToggleId}
           name="ingredients"
+        />
+
+        {/* pizzaTypes   */}
+        <CheckboxFiltersGroup
+          className="mb-5 mt-5"
+          title="Тип тіста"
+          items={[
+            { text: "Тонке", value: "1" },
+            { text: "Традиційне", value: "2" },
+          ]}
+          selected={pizzaTypes}
+          onClickCheckbox={toggleType}
+          name="pizzaTypes"
         />
       </div>
     </>
