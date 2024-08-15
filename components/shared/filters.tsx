@@ -13,6 +13,10 @@ import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 interface Props {
   className?: string;
 }
+interface PriceProps {
+  priceFrom: number;
+  priceTo: number;
+}
 
 export const Filters = ({ className }: Props) => {
   const {
@@ -22,10 +26,22 @@ export const Filters = ({ className }: Props) => {
     onToggleId,
   } = useFilterIngredients();
 
+  const [price, setPrice] = React.useState<PriceProps>({
+    priceFrom: 0,
+    priceTo: 1500,
+  });
+
   const ingredients = basicIngredients.map((ingredient) => ({
     text: ingredient.name,
     value: String(ingredient.id),
   }));
+
+  const updatePrice = (name: keyof PriceProps, newPrice: number) => {
+    setPrice((prevState) => ({
+      ...prevState,
+      [name]: newPrice,
+    }));
+  };
 
   return (
     <>
@@ -46,12 +62,30 @@ export const Filters = ({ className }: Props) => {
               placeholder="0"
               min={0}
               max={1500}
-              defaultValue={0}
+              value={String(price.priceFrom)}
+              onChange={(e) => updatePrice("priceFrom", Number(e.target.value))}
+              step={10}
             />
-            <Input type="number" placeholder="0" min={0} max={1500} />
+            <Input
+              type="number"
+              placeholder="0"
+              min={0}
+              max={1500}
+              value={String(price.priceTo)}
+              onChange={(e) => updatePrice("priceTo", Number(e.target.value))}
+              step={10}
+            />
           </div>
 
-          <RangeSlider min={0} max={1500} step={10} value={[0, 1500]} />
+          <RangeSlider
+            min={0}
+            max={1500}
+            step={10}
+            value={[price.priceFrom, price.priceTo]}
+            onValueChange={([priceFrom, priceTo]) =>
+              setPrice({ priceFrom, priceTo })
+            }
+          />
         </div>
 
         {/* Filter ingredients */}
