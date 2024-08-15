@@ -42,7 +42,7 @@ export const SearchInput = ({ className }: SearchInputProps) => {
 
       getData();
     },
-    300,
+    200,
     [searchQuery]
   );
   return (
