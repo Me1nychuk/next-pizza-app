@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import React, { PropsWithChildren } from "react";
 
 type TitleSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";

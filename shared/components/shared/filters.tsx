@@ -1,9 +1,13 @@
 "use client";
 
 import React from "react";
-import { CheckboxFiltersGroup, RangeSlider, Title } from "@/components/shared";
+import {
+  CheckboxFiltersGroup,
+  RangeSlider,
+  Title,
+} from "@/shared/components/shared";
 import { Input } from "../ui";
-import { useQueryFilters, useFilters, useIngredients } from "@/hooks";
+import { useQueryFilters, useFilters, useIngredients } from "@/shared/hooks";
 
 interface Props {
   className?: string;

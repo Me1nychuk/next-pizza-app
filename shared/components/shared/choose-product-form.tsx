@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
-import { Title } from "@/components/shared";
+import { cn } from "@/shared/lib/utils";
+import { Title } from "@/shared/components/shared";
 import React from "react";
-import { Button } from "@/components/ui";
+import { Button } from "@/shared/components/ui";
 import Image from "next/image";
 
 interface ChooseProductFormProps {

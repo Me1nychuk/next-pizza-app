@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import React from "react";
 import { Container } from "./container";
 import Image from "next/image";
 import { Button } from "../ui";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
-import { SearchInput } from "@/components/shared";
+import { SearchInput } from "@/shared/components/shared";
 
 interface Props {
   className?: string;

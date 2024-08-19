@@ -1,8 +1,8 @@
 "use client";
-import { Dialog } from "@/components/ui";
-import { DialogContent } from "@/components/ui/dialog";
-import { ChoosePizzaForm, ChooseProductForm, Title } from "@/components/shared";
-import { cn } from "@/lib/utils";
+import { Dialog } from "@/shared/components/ui";
+import { DialogContent } from "@/shared/components/ui/dialog";
+import { ChoosePizzaForm, ChooseProductForm } from "@/shared/components/shared";
+import { cn } from "@/shared/lib/utils";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/@types/prisma";

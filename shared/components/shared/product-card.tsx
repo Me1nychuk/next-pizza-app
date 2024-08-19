@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui";
 import { Plus } from "lucide-react";
-import { Title } from "@/components/shared";
+import { Title } from "@/shared/components/shared";
 
 interface ProductCardProps {
   id: string;
