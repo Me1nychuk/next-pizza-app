@@ -2,18 +2,13 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
-interface ProductImageProps {
+interface PizzaImageProps {
   className?: string;
   src: string;
   alt: string;
   size: 20 | 30 | 40;
 }
-export const ProductImage = ({
-  className,
-  src,
-  alt,
-  size,
-}: ProductImageProps) => {
+export const PizzaImage = ({ className, src, alt, size }: PizzaImageProps) => {
   return (
     <>
       <div
