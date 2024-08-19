@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { PizzaImage, Title } from "@/components/shared";
+import { GroupVariants, PizzaImage, Title } from "@/components/shared";
 import React from "react";
 import { Button } from "@/components/ui";
 import Image from "next/image";
@@ -33,7 +33,14 @@ export const ChoosePizzaForm = ({
             {name}
           </Title>
           <p className="text-gray-400">{productDetails}</p>
-
+          <GroupVariants
+            items={[
+              { name: "Мала", value: "1" },
+              { name: "Середня", value: "2", disabled: true },
+              { name: "Велика", value: "3" },
+            ]}
+            selectedValue="1"
+          />
           <Button className="h-[55px] px-10 text-base rounded-[18px] w-full">
             Додати до кошика за {totalPrice}₴
           </Button>

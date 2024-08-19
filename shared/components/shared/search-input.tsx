@@ -6,7 +6,7 @@ import { useClickAway, useDebounce } from "react-use";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Api } from "@/services/api-client";
+import { Api } from "@/shared/services/api-client";
 import { Product } from "@prisma/client";
 
 interface SearchInputProps {
