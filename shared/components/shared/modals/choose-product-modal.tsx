@@ -28,6 +28,7 @@ export const ChooseProductModal = ({
         >
           {isPizzaForm ? (
             <ChoosePizzaForm
+              items={product.items}
               imageUrl={product.imageUrl}
               name={product.name}
               ingredients={product.ingredients}
