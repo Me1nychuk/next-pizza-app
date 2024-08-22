@@ -109,7 +109,7 @@ export const ChoosePizzaForm = ({
             onClick={handleClick}
             className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           >
-            Додати до кошика за ${totalPrice} ₴
+            Додати до кошика за {totalPrice} ₴
           </Button>
         </div>
       </div>
