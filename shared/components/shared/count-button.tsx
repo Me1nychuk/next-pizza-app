@@ -12,7 +12,9 @@ export const CountButton = ({
   className,
   size = "sm",
   value = 1,
-  onClick = () => {},
+  onClick = (e) => {
+    console.log(e);
+  },
 }: CountButtonProps) => {
   return (
     <>
@@ -25,13 +27,13 @@ export const CountButton = ({
         <CountIconButton
           size={size}
           disabled={value < 2}
-          onClick={() => onClick("minus")}
+          onClick={() => onClick?.("minus")}
           type="minus"
         />
         <b className={size === "sm" ? "text-sm" : "text-md"}>{value}</b>
         <CountIconButton
           size={size}
-          onClick={() => onClick("plus")}
+          onClick={() => onClick?.("plus")}
           type="plus"
         />
       </div>

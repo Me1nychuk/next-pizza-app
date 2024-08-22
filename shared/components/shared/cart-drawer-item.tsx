@@ -14,11 +14,17 @@ export const CartDrawerItem = ({
   name,
   price,
   quantity,
-  disabled,
-}: CartDrawerItemProps) => {
+  disabled = false,
+}: //   onClickCountButton,
+//   onClickRemove,
+CartDrawerItemProps) => {
   return (
     <>
-      <div className={cn("flex bg-white p-5  gap-6", className)}>
+      <div
+        className={cn("flex bg-white p-5  gap-6", className, {
+          "opacity-50 cursor-not-allowed pointer-events-none": disabled,
+        })}
+      >
         <CartItem.Image src={imageUrl} />
         <div className="flex-1">
           <CartItem.Info name={name} details={details} />
@@ -26,7 +32,7 @@ export const CartDrawerItem = ({
           <hr className="my-3"></hr>
 
           <div className="flex items-center justify-between">
-            <CartItem.CountButton />
+            <CartItem.CountButton value={quantity} />
             <div className="flex items-center gap-3">
               <CartItem.Price value={price} />
               <Trash2Icon
