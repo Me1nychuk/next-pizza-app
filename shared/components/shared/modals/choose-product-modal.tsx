@@ -7,6 +7,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/@types/prisma";
 import { useCartStore } from "@/shared/store/cart";
+import toast from "react-hot-toast";
 
 interface ChooseProductModalProps {
   className?: string;
@@ -20,19 +21,25 @@ export const ChooseProductModal = ({
   const firstItem = product.items[0];
   const isPizzaForm = Boolean(firstItem.pizzaType);
 
-  const addCartItem = useCartStore((state) => state.addCartItem);
+  const [addCartItem, loading] = useCartStore((state) => [
+    state.addCartItem,
+    state.loading,
+  ]);
 
-  const onClickAddProduct = () => {
-    addCartItem({
-      productItemId: firstItem.id,
-    });
-  };
+  const onSubmit = async (productId?: number, ingredients?: number[]) => {
+    const productIdValue = productId ?? firstItem.id;
+    try {
+      await addCartItem({
+        productItemId: productIdValue,
+        ingredients,
+      });
 
-  const onClickAddPizza = (productId: number, ingredients: number[]) => {
-    addCartItem({
-      productItemId: productId,
-      ingredients,
-    });
+      toast.success(`"${product.name}" було додана до кошика.`);
+      router.back();
+    } catch (error) {
+      console.error(error);
+      toast.error("Товар не було додана до кошика.");
+    }
   };
   return (
     <>
@@ -49,14 +56,16 @@ export const ChooseProductModal = ({
               imageUrl={product.imageUrl}
               name={product.name}
               ingredients={product.ingredients}
-              onClickAddCart={onClickAddPizza}
+              onClickAddCart={onSubmit}
+              loading={loading}
             />
           ) : (
             <ChooseProductForm
               imageUrl={product.imageUrl}
               name={product.name}
-              onClickAdd={onClickAddProduct}
+              onClickAdd={onSubmit}
               price={firstItem.price}
+              loading={loading}
             />
           )}
         </DialogContent>

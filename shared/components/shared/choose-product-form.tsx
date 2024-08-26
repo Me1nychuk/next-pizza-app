@@ -10,6 +10,7 @@ interface ChooseProductFormProps {
   className?: string;
   price: number;
   onClickAdd?: () => void;
+  loading?: boolean;
 }
 export const ChooseProductForm = ({
   className,
@@ -17,6 +18,7 @@ export const ChooseProductForm = ({
   name,
   price,
   onClickAdd,
+  loading,
 }: ChooseProductFormProps) => {
   return (
     <>
@@ -43,7 +45,8 @@ export const ChooseProductForm = ({
           </Title>
 
           <Button
-            onClick={onClickAdd}
+            onClick={() => onClickAdd?.()}
+            loading={loading}
             className="h-[55px] px-10 text-base rounded-[18px] w-full"
           >
             Додати до кошика за {price}₴

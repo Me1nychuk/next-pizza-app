@@ -21,6 +21,7 @@ interface ChoosePizzaFormProps {
   ingredients: Ingredient[];
   items: ProductItem[];
   onClickAddCart?: (productId: number, ingredients: number[]) => void;
+  loading?: boolean;
 }
 export const ChoosePizzaForm = ({
   className,
@@ -29,6 +30,7 @@ export const ChoosePizzaForm = ({
   ingredients,
   items,
   onClickAddCart,
+  loading,
 }: ChoosePizzaFormProps) => {
   const {
     size,
@@ -95,6 +97,7 @@ export const ChoosePizzaForm = ({
 
           <Button
             onClick={handleClick}
+            loading={loading}
             className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           >
             Додати до кошика за {totalPrice} ₴
