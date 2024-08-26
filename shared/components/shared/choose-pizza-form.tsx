@@ -20,7 +20,7 @@ interface ChoosePizzaFormProps {
   className?: string;
   ingredients: Ingredient[];
   items: ProductItem[];
-  onClickAddCart?: VoidFunction;
+  onClickAddCart?: (productId: number, ingredients: number[]) => void;
 }
 export const ChoosePizzaForm = ({
   className,
@@ -38,6 +38,7 @@ export const ChoosePizzaForm = ({
     setSize,
     setType,
     addIngredient,
+    currentItemId,
   } = usePizzaOptions(items);
 
   const { totalPrice, productDetails } = getPizzaDetails(
@@ -49,24 +50,11 @@ export const ChoosePizzaForm = ({
   );
 
   const handleClick = () => {
-    onClickAddCart?.();
-    console.log(`receipt - ${name} `, {
-      type,
-      size,
-      ingredients: selectedIngredients,
-      price: totalPrice,
-    });
+    if (currentItemId) {
+      onClickAddCart?.(currentItemId, Array.from(selectedIngredients));
+    }
   };
 
-  React.useEffect(() => {
-    const isAvailableSize = availablePizzaSizes?.find(
-      (item) => Number(item.value) === size && !item.disabled
-    );
-    const availableSize = availablePizzaSizes?.find((item) => !item.disabled);
-    if (!isAvailableSize && availableSize) {
-      setSize(Number(availableSize.value) as PizzaSize);
-    }
-  }, [type]);
   return (
     <>
       <div className={cn("flex flex-1", className)}>

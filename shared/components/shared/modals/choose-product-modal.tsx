@@ -6,6 +6,7 @@ import { cn } from "@/shared/lib/utils";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/@types/prisma";
+import { useCartStore } from "@/shared/store/cart";
 
 interface ChooseProductModalProps {
   className?: string;
@@ -16,7 +17,23 @@ export const ChooseProductModal = ({
   product,
 }: ChooseProductModalProps) => {
   const router = useRouter();
-  const isPizzaForm = Boolean(product.items[0].pizzaType);
+  const firstItem = product.items[0];
+  const isPizzaForm = Boolean(firstItem.pizzaType);
+
+  const addCartItem = useCartStore((state) => state.addCartItem);
+
+  const onClickAddProduct = () => {
+    addCartItem({
+      productItemId: firstItem.id,
+    });
+  };
+
+  const onClickAddPizza = (productId: number, ingredients: number[]) => {
+    addCartItem({
+      productItemId: productId,
+      ingredients,
+    });
+  };
   return (
     <>
       <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -32,11 +49,14 @@ export const ChooseProductModal = ({
               imageUrl={product.imageUrl}
               name={product.name}
               ingredients={product.ingredients}
+              onClickAddCart={onClickAddPizza}
             />
           ) : (
             <ChooseProductForm
               imageUrl={product.imageUrl}
               name={product.name}
+              onClickAdd={onClickAddProduct}
+              price={firstItem.price}
             />
           )}
         </DialogContent>

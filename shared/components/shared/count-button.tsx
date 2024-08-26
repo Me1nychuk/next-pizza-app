@@ -12,9 +12,7 @@ export const CountButton = ({
   className,
   size = "sm",
   value = 1,
-  onClick = (e) => {
-    console.log(e);
-  },
+  onClick,
 }: CountButtonProps) => {
   return (
     <>
