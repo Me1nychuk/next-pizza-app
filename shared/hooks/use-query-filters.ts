@@ -20,5 +20,5 @@ export const useQueryFilters = (filters: Filters) => {
       router.push(`?${queryString}`, { scroll: false });
     }
     isMounted.current = true;
-  }, [filters, router]);
+  }, [filters]);
 };

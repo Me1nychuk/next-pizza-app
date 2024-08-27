@@ -32,6 +32,18 @@ export const Filters = ({ className }: Props) => {
         <Title className="font-bold mb-5">Фільтрація</Title>
         {/* top checkboxes */}
 
+        {/* pizzaTypes   */}
+        <CheckboxFiltersGroup
+          className="mb-5 mt-5"
+          title="Тип тіста"
+          items={[
+            { text: "Тонке", value: "1" },
+            { text: "Традиційне", value: "2" },
+          ]}
+          selected={filters.pizzaTypes}
+          onClickCheckbox={filters.setPizzaTypes}
+          name="pizzaTypes"
+        />
         <CheckboxFiltersGroup
           className="mb-5"
           title="Розміри"
@@ -99,19 +111,6 @@ export const Filters = ({ className }: Props) => {
           selected={filters.selectedIngredients}
           onClickCheckbox={filters.setSelectedIngredients}
           name="ingredients"
-        />
-
-        {/* pizzaTypes   */}
-        <CheckboxFiltersGroup
-          className="mb-5 mt-5"
-          title="Тип тіста"
-          items={[
-            { text: "Тонке", value: "1" },
-            { text: "Традиційне", value: "2" },
-          ]}
-          selected={filters.pizzaTypes}
-          onClickCheckbox={filters.setPizzaTypes}
-          name="pizzaTypes"
         />
       </div>
     </>

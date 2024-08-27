@@ -56,15 +56,18 @@ export const useFilters = (): ReturnProps => {
     new Set<string>(searchParams.get("pizzaTypes")?.split(",") || [])
   );
 
-  return {
-    sizes,
-    selectedIngredients,
-    prices,
-    pizzaTypes,
-    setPrice: updatePrice,
-    setPrices,
-    setSelectedIngredients: toggleIngredients,
-    setSizes: toggleSize,
-    setPizzaTypes: toggleType,
-  };
+  return React.useMemo(
+    () => ({
+      sizes,
+      selectedIngredients,
+      prices,
+      pizzaTypes,
+      setPrice: updatePrice,
+      setPrices,
+      setSelectedIngredients: toggleIngredients,
+      setSizes: toggleSize,
+      setPizzaTypes: toggleType,
+    }),
+    [selectedIngredients, sizes, pizzaTypes, prices]
+  );
 };
