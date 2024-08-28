@@ -1,3 +1,4 @@
+import { ProductForm } from "./product-form";
 export { Categories } from "./categories";
 export { Header } from "./header";
 export { Container } from "./container";
@@ -21,4 +22,5 @@ export { CartDrawer } from "./cart-drawer";
 export { CartDrawerItem } from "./cart-drawer-item";
 export { CountButton } from "./count-button";
 export { CountIconButton } from "./count-icon-button";
+export { ProductForm } from "./product-form";
 export * from "./modals";
