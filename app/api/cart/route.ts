@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
 
     const data = (await req.json()) as CreateCartItemValues;
 
+    // TODO: change logic to find a right cart item, because prisma doesn't support it
     const findCartItem = await prisma.cartItem.findFirst({
       where: {
         cartId: userCart.id,

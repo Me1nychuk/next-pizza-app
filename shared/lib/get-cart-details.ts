@@ -3,11 +3,11 @@ import { CartStateItem } from "../store/cart";
 import { CartDTO } from "../services/dto/cart.dto";
 import { calcCartItemTotalPrice } from "./calc-cart-item-total-price";
 
-interface RetuenProps {
+interface ReturnProps {
   totalAmount: number;
   items: CartStateItem[];
 }
-export const getCartDetails = (data: CartDTO): RetuenProps => {
+export const getCartDetails = (data: CartDTO): ReturnProps => {
   const items = data.items.map((item) => ({
     id: item.id,
     quantity: item.quantity,
@@ -16,6 +16,7 @@ export const getCartDetails = (data: CartDTO): RetuenProps => {
     price: calcCartItemTotalPrice(item),
     pizzaSize: item.productItem.size,
     pizzaType: item.productItem.pizzaType,
+    disabled: false,
     ingredients: item.ingredients.map((ingredient) => ({
       name: ingredient.name,
       price: ingredient.price,

@@ -6,7 +6,6 @@ import { Trash2Icon } from "lucide-react";
 
 interface CartDrawerItemProps extends CartItemDetailsProps {
   className?: string;
-  disabled?: boolean;
   onClickCountButton?: (type: "plus" | "minus") => void;
   onClickRemove?: () => void;
 }
