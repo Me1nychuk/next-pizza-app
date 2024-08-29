@@ -5,3 +5,6 @@ export { Dialog } from "./dialog";
 export { Select } from "./select";
 export { Skeleton } from "./skeleton";
 export { Slider } from "./slider";
+export { Drawer } from "./drawer";
+export { Sheet } from "./sheet";
+export { Textarea } from "./textarea";
