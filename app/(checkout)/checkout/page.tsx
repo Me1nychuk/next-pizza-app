@@ -1,4 +1,5 @@
 import {
+  CheckoutItem,
   CheckoutItemDetails,
   Container,
   Title,
@@ -11,15 +12,44 @@ import React from "react";
 const Page: React.FC = () => {
   return (
     <>
-      <Container className="mt-10">
+      <Container className="mt-10 relative">
         <Title className="font-extrabold mb-8 text-[36px]">
           Оформлення замовлення
         </Title>
 
         <div className="flex items-start gap-10">
           <div className="flex flex-col gap-10 flex-1 mb-20">
-            <WhiteBlock title="1. Кошик" contentClassName="text-red-500">
-              blabla blabla
+            <WhiteBlock title="1. Кошик" contentClassName="py-0 px-6">
+              <CheckoutItem
+                id={1}
+                imageUrl={
+                  "https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif"
+                }
+                details={"sdasdas fgsdsdg,fsdf sdf ,yt jt,j tt yj"}
+                name={"Чорітто"}
+                price={374}
+                quantity={2}
+              />
+              <CheckoutItem
+                id={2}
+                imageUrl={
+                  "https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif"
+                }
+                details={"sdasdas fgsdsdg,fsdf sdf ,yt jt,j tt yj"}
+                name={"Чорітто"}
+                price={374}
+                quantity={2}
+              />
+              <CheckoutItem
+                id={3}
+                imageUrl={
+                  "https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif"
+                }
+                details={"sdasdas fgsdsdg,fsdf sdf ,yt jt,j tt yj"}
+                name={"Чорітто"}
+                price={374}
+                quantity={2}
+              />
             </WhiteBlock>
 
             <WhiteBlock title="2. Персональні дані" contentClassName="">
@@ -56,7 +86,7 @@ const Page: React.FC = () => {
               </div>
             </WhiteBlock>
           </div>
-          <div className="w-[450px] bg-white rounded-3xl p-3">
+          <div className=" w-[450px] bg-white rounded-3xl p-3">
             <WhiteBlock className="p-6 sticky top-4" contentClassName="p-0">
               <div className="">
                 <div className="flex flex-col gap-1">

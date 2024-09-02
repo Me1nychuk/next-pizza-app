@@ -1,4 +1,3 @@
-import { ProductForm } from "./product-form";
 export { Categories } from "./categories";
 export { Header } from "./header";
 export { Container } from "./container";
@@ -25,4 +24,5 @@ export { CountIconButton } from "./count-icon-button";
 export { ProductForm } from "./product-form";
 export { WhiteBlock } from "./white-block";
 export { CheckoutItemDetails } from "./checkout-item-details";
+export { CheckoutItem } from "./checkout-item";
 export * from "./modals";
