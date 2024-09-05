@@ -12,6 +12,7 @@ import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 import { useCart } from "@/shared/hooks";
 import { getCartItemDetails } from "@/shared/lib";
 import { Trash } from "lucide-react";
+import { FormInput } from "@/shared/components/shared/form-components";
 import React from "react";
 
 const Page: React.FC = () => {
@@ -77,7 +78,7 @@ const Page: React.FC = () => {
                   type="email"
                   placeholder="Ваша електронна пошта"
                 />
-                <Input
+                <FormInput
                   className="appearance-none no-spin"
                   name="number"
                   type="number"
