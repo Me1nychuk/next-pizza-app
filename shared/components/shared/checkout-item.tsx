@@ -37,11 +37,10 @@ export const CheckoutItem = ({
       >
         <Cart.Image src={imageUrl} />
 
-        <Cart.Info name={name} details={details} />
-
-        <div className="flex-1 text-center">
-          <Cart.Price value={price} />
+        <div className=" flex-1">
+          <Cart.Info name={name} details={details} />
         </div>
+        <Cart.Price value={price} />
 
         <Cart.CountButton value={quantity} onClick={onClickCountButton} />
 

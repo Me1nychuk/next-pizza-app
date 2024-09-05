@@ -5,7 +5,6 @@ import { ArrowRight, ShoppingCart } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { CartDrawer } from "./cart-drawer";
 import { useCartStore } from "@/shared/store/cart";
-import { LoaderCircle } from "lucide-react";
 
 interface CartButtonProps {
   className?: string;

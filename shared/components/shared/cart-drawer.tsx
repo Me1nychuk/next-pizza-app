@@ -15,9 +15,9 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { CartDrawerItem } from "./cart-drawer-item";
 import { getCartItemDetails } from "@/shared/lib";
-import { useCartStore } from "@/shared/store/cart";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 import { Title } from "@/shared/components/shared";
+import { useCart } from "@/shared/hooks";
 
 interface CartDrawerProps {
   className?: string;
@@ -25,24 +25,10 @@ interface CartDrawerProps {
   children?: React.ReactNode;
 }
 export const CartDrawer = ({ children, className }: CartDrawerProps) => {
-  const [
-    totalAmount,
-    items,
-    fetchCartItems,
-    updateItemsQuantity,
-    deleteCartItem,
-  ] = useCartStore((state) => [
-    state.totalAmount,
-    state.items,
-    state.fetchCartItems,
-    state.updateItemsQuantity,
-    state.deleteCartItem,
-  ]);
+  const { totalAmount, items, updateItemsQuantity, deleteCartItem, loading } =
+    useCart();
 
-  React.useEffect(() => {
-    fetchCartItems();
-  }, []);
-
+  const [redirecting, setRedirecting] = React.useState(false);
   const onClickCountButton = (
     id: number,
     quantity: number,
@@ -125,8 +111,12 @@ export const CartDrawer = ({ children, className }: CartDrawerProps) => {
                     </span>
                     <span className="font-bold text-xl">{totalAmount}₴</span>
                   </div>
-                  <Link href="/cart">
-                    <Button className="w-full font-bold h-14">
+                  <Link href="/checkout">
+                    <Button
+                      onClick={() => setRedirecting(true)}
+                      className="w-full font-bold h-14"
+                      loading={loading || redirecting}
+                    >
                       Оформити замовлення
                       <ArrowRight size={16} className="ml-3" />
                     </Button>

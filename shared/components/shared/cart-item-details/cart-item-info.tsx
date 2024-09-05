@@ -13,10 +13,8 @@ export const CartItemInfo = ({
 }: CartItemInfoProps) => {
   return (
     <>
-      <div>
-        <div className={cn("flex items-center justify-between", className)}>
-          <h2 className="text-lg font-bold flex-1 leading-6">{name}</h2>
-        </div>
+      <div className={cn("flex flex-col justify-between ", className)}>
+        <h2 className="text-lg font-bold flex-1 leading-6">{name}</h2>
         {details && <p className="text-sm text-gray-400 w-[90%]">{details}</p>}
       </div>
     </>
