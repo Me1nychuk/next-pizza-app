@@ -12,7 +12,7 @@ export const CheckoutItemSkeleton = ({
     <>
       <div
         className={cn(
-          "flex items-center bg-white p-8  gap-5 border-y border-y-neutral-100",
+          "flex items-center bg-white p-8  gap-4 border-y border-y-neutral-100",
           className
         )}
       >
@@ -21,9 +21,8 @@ export const CheckoutItemSkeleton = ({
           <Skeleton className="h-8 w-[150px] mb-1" />
           <Skeleton className="h-4 w-[200px]" />
         </div>
-        <div className="flex-1">
-          <Skeleton className="h-8 w-16 mx-auto" />
-        </div>
+
+        <Skeleton className="h-8 w-16 mx-auto" />
         <div className="w-[90px] flex justify-between ">
           <Skeleton className="h-8 w-8" />
           <Skeleton className="h-8 w-8" />

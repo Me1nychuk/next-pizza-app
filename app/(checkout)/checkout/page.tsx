@@ -1,23 +1,40 @@
 "use client";
 
-import {
-  CheckoutItem,
-  CheckoutSidebar,
-  Container,
-  Title,
-  WhiteBlock,
-} from "@/shared/components/shared";
-import { Input, Textarea } from "@/shared/components/ui";
-import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { CheckoutSidebar, Container, Title } from "@/shared/components/shared";
 import { useCart } from "@/shared/hooks";
-import { getCartItemDetails } from "@/shared/lib";
-import { Trash } from "lucide-react";
-import { FormInput } from "@/shared/components/shared/form-components";
 import React from "react";
+import {
+  CheckoutAddressForm,
+  CheckoutCart,
+  CheckoutPersonalForm,
+} from "@/shared/components/shared/checkout-components";
+import {
+  CheckoutFormSchema,
+  CheckoutFormValues,
+} from "@/shared/components/shared/checkout-components/checkout-form-schema";
 
 const Page: React.FC = () => {
   const { totalAmount, items, updateItemsQuantity, deleteCartItem, loading } =
     useCart();
+
+  const form = useForm<CheckoutFormValues>({
+    resolver: zodResolver(CheckoutFormSchema),
+    defaultValues: {
+      firstName: "",
+      secondName: "",
+      email: "",
+      phone: "",
+      address: "",
+      comment: "",
+    },
+  });
+
+  const onSubmit = (data: CheckoutFormValues) => {
+    console.log(data);
+  };
   const onClickCountButton = (
     id: number,
     quantity: number,
@@ -32,79 +49,27 @@ const Page: React.FC = () => {
           Оформлення замовлення
         </Title>
 
-        <div className="flex items-start gap-10">
-          <div className="flex flex-col gap-10 flex-1 mb-20">
-            <WhiteBlock
-              title="1. Кошик"
-              contentClassName="py-0 px-6"
-              endAdornment={
-                <div className="flex items-center gap-2 text-gray-400 cursor-pointer hover:text-gray-700 transition-all duration-300">
-                  Очистити Кошик <Trash size={16} />
-                </div>
-              }
-            >
-              {items.map((item) => (
-                <CheckoutItem
-                  key={item.id}
-                  id={item.id}
-                  imageUrl={item.imageUrl}
-                  details={
-                    item.pizzaSize && item.pizzaType
-                      ? getCartItemDetails(
-                          item.ingredients,
-                          item.pizzaType as PizzaType,
-                          item.pizzaSize as PizzaSize
-                        )
-                      : ""
-                  }
-                  disabled={item.disabled}
-                  name={item.name}
-                  price={item.price}
-                  quantity={item.quantity}
-                  onClickCountButton={(type) =>
-                    onClickCountButton(item.id, item.quantity, type)
-                  }
-                  onClickRemove={() => deleteCartItem(item.id)}
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex items-start gap-10">
+              <div className="flex flex-col gap-10 flex-1 mb-20">
+                <CheckoutCart
+                  items={items}
+                  onClickCountButton={onClickCountButton}
+                  deleteCartItem={deleteCartItem}
+                  loading={loading}
                 />
-              ))}
-            </WhiteBlock>
-
-            <WhiteBlock title="2. Персональні дані" contentClassName="">
-              <div className="grid grid-cols-2 gap-5">
-                <Input name="name" type="text" placeholder="Ваше ім'я" />
-                <Input name="surname" type="text" placeholder="Ваше прізвище" />
-                <Input
-                  name="email"
-                  type="email"
-                  placeholder="Ваша електронна пошта"
+                <CheckoutPersonalForm
+                  className={loading ? "opacity-40 pointer-events-none " : ""}
                 />
-                <FormInput
-                  className="appearance-none no-spin"
-                  name="number"
-                  type="number"
-                  placeholder="Номер телефону"
+                <CheckoutAddressForm
+                  className={loading ? "opacity-40 pointer-events-none " : ""}
                 />
               </div>
-            </WhiteBlock>
-
-            <WhiteBlock title="3. Адреса доставки " contentClassName="">
-              <div className="flex flex-col gap-5">
-                <Input
-                  name="address"
-                  type="text"
-                  placeholder="Ваша адреса до замовлення"
-                />
-                <Textarea
-                  className="text-base"
-                  rows={5}
-                  name="comment"
-                  placeholder="Ваш коментар"
-                />
-              </div>
-            </WhiteBlock>
-          </div>
-          <CheckoutSidebar totalAmount={totalAmount} loading={loading} />
-        </div>
+              <CheckoutSidebar totalAmount={totalAmount} loading={loading} />
+            </div>
+          </form>
+        </FormProvider>
       </Container>
     </>
   );
