@@ -15,10 +15,13 @@ import {
   CheckoutFormSchema,
   CheckoutFormValues,
 } from "@/shared/components/shared/checkout-components/checkout-form-schema";
+import { createOrder } from "@/app/api/actions";
+import toast from "react-hot-toast";
 
 const Page: React.FC = () => {
   const { totalAmount, items, updateItemsQuantity, deleteCartItem, loading } =
     useCart();
+  const [submitting, setSubmitting] = React.useState(false);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(CheckoutFormSchema),
@@ -32,8 +35,20 @@ const Page: React.FC = () => {
     },
   });
 
-  const onSubmit = (data: CheckoutFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: CheckoutFormValues) => {
+    try {
+      setSubmitting(true);
+      const url = await createOrder(data);
+
+      toast.success("Ваше замовлення надіслано", { icon: "✅" });
+      if (url) {
+        location.href = url;
+      }
+    } catch (error) {
+      setSubmitting(false);
+      console.log(error);
+      toast.error("Ваше замовлення не надіслано", { icon: "❌" });
+    }
   };
   const onClickCountButton = (
     id: number,
@@ -66,7 +81,10 @@ const Page: React.FC = () => {
                   className={loading ? "opacity-40 pointer-events-none " : ""}
                 />
               </div>
-              <CheckoutSidebar totalAmount={totalAmount} loading={loading} />
+              <CheckoutSidebar
+                totalAmount={totalAmount}
+                loading={loading || submitting}
+              />
             </div>
           </form>
         </FormProvider>
