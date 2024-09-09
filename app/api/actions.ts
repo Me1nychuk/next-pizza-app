@@ -6,6 +6,7 @@ import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
 import { sendEmail } from "@/shared/lib";
 import { PayOrderTemplate } from "@/shared/components/shared/email-templates/pay-order";
+// import { createPayment } from "@/shared/lib/create-payment";
 
 export const createOrder = async (data: CheckoutFormValues) => {
   try {
@@ -66,18 +67,18 @@ export const createOrder = async (data: CheckoutFormValues) => {
       },
     });
     // TODO: add payment
+
     await sendEmail(
       data.email,
       "NEXT PIZZA APP: Замовлення відправлено",
       PayOrderTemplate({
         orderId: order.id,
         totalAmount: order.totalAmount,
-        paymentLink: "https://lucide.dev/icons/badge-alert",
+        paymentLink: "https://www.linkedin.com/in/sviatoslav-melnychuk/",
       })
     );
+    return "https://www.linkedin.com/in/sviatoslav-melnychuk/";
   } catch (error) {
     console.log("[createOrder] server error", error);
   }
-
-  return "https://lucide.dev/icons/badge-alert";
 };

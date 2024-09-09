@@ -41,6 +41,7 @@ const Page: React.FC = () => {
       const url = await createOrder(data);
 
       toast.success("Ваше замовлення надіслано", { icon: "✅" });
+      toast.success("На даний момент оплата не працює", { icon: "⚠" });
       if (url) {
         location.href = url;
       }
