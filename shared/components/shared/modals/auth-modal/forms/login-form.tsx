@@ -36,7 +36,7 @@ export const LoginForm = ({ className, onClose }: LoginFormProps) => {
       toast.success("Вхід в акаунт успішний", { icon: "✅" });
       onClose?.();
     } catch (error) {
-      console.log("[LoginForm] error", error);
+      console.error("[LoginForm] error", error);
       toast.error("Не вдалося увійти", { icon: "❌" });
     }
   };
