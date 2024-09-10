@@ -39,9 +39,9 @@ export const FormInput = ({
     <>
       <div className={className}>
         {label && (
-          <p className="font-medium mb-2">
+          <p className="font-medium mb-2 flex gap-1 items-center">
             {label}
-            {required && <BadgeAlert />}
+            {required && <BadgeAlert size={12} color="red" />}
           </p>
         )}
         <div className="relative">

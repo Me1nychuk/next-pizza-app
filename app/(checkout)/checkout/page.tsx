@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { CheckoutSidebar, Container, Title } from "@/shared/components/shared";
