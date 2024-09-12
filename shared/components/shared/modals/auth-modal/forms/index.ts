@@ -1,2 +1,2 @@
 export { LoginForm } from "./login-form";
-export { AuthForm } from "./auth-form";
+export { RegisterForm } from "./register-form";

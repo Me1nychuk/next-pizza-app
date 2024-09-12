@@ -2,10 +2,12 @@
 
 import { prisma } from "@/prisma/prisma-client";
 import { CheckoutFormValues } from "@/shared/components/shared/checkout-components/checkout-form-schema";
-import { OrderStatus } from "@prisma/client";
+import { OrderStatus, Prisma } from "@prisma/client";
 import { cookies } from "next/headers";
 import { sendEmail } from "@/shared/lib";
 import { PayOrderTemplate } from "@/shared/components/shared/email-templates/pay-order";
+import { getUserSession } from "@/shared/lib/get-user-session";
+import { hashSync } from "bcrypt";
 // import { createPayment } from "@/shared/lib/create-payment";
 
 export const createOrder = async (data: CheckoutFormValues) => {
@@ -45,7 +47,7 @@ export const createOrder = async (data: CheckoutFormValues) => {
     const order = await prisma.order.create({
       data: {
         token: cartToken,
-        fullname: data.firstName + " " + data.secondName,
+        fullName: data.firstName + " " + data.secondName,
         email: data.email,
         phone: data.phone,
         address: data.address,
@@ -80,5 +82,64 @@ export const createOrder = async (data: CheckoutFormValues) => {
     return "https://www.linkedin.com/in/sviatoslav-melnychuk/";
   } catch (error) {
     console.log("[createOrder] server error", error);
+  }
+};
+
+export const updateUserInfo = async (body: Prisma.UserUpdateInput) => {
+  try {
+    const session = await getUserSession();
+    if (!session) {
+      throw new Error("User not found");
+    }
+
+    const findUser = await prisma.user.findFirst({
+      where: {
+        id: Number(session?.id),
+      },
+    });
+    const user = await prisma.user.update({
+      where: {
+        id: Number(session?.id),
+      },
+      data: {
+        email: body.email,
+        fullName: body.fullName,
+        password: body.password
+          ? hashSync(String(body.password), 10)
+          : findUser?.password,
+      },
+    });
+    return user;
+  } catch (error) {
+    console.error("[updateUserInfo] server error", error);
+  }
+};
+
+export const registerUser = async (body: Prisma.UserCreateInput) => {
+  try {
+    const findUser = await prisma.user.findFirst({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (findUser) {
+      if (!findUser.verified) {
+        throw new Error("Email is already registered and not verified");
+      }
+      throw new Error("Email already registered");
+    }
+
+    const user = await prisma.user.create({
+      data: {
+        email: body.email,
+        fullName: body.fullName,
+        password: hashSync(String(body.password), 10),
+      },
+    });
+
+    return user;
+  } catch (error) {
+    console.error("[registerUser] server error", error);
   }
 };

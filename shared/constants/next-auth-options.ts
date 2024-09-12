@@ -57,7 +57,7 @@ export const authOptions: AuthOptions = {
 
         return {
           id: findUser.id,
-          name: findUser.fullname,
+          name: findUser.fullName,
           email: findUser.email,
           role: findUser.role,
         };
@@ -107,7 +107,7 @@ export const authOptions: AuthOptions = {
         await prisma.user.create({
           data: {
             email: user.email,
-            fullname: user.name || "User#" + user.id,
+            fullName: user.name || "User#" + user.id,
             password: hashSync(user.id.toString(), 10),
             verified: new Date(),
             provider: account?.provider,
@@ -133,7 +133,7 @@ export const authOptions: AuthOptions = {
 
       if (user) {
         token.id = String(user.id);
-        token.name = user.fullname;
+        token.name = user.fullName;
         token.email = user.email;
         token.role = user.role;
       }

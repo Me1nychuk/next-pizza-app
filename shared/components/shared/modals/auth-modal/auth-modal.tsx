@@ -4,7 +4,8 @@ import { cn } from "@/shared/lib/utils";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
-import { AuthForm, LoginForm } from "./forms";
+import { RegisterForm, LoginForm } from "./forms";
+import toast from "react-hot-toast";
 
 interface AuthModalProps {
   className?: string;
@@ -27,7 +28,7 @@ export const AuthModal = ({ className, open, onClose }: AuthModalProps) => {
           {type === "login" ? (
             <LoginForm onClose={handleClose} />
           ) : (
-            <AuthForm />
+            <RegisterForm onClose={handleClose} />
           )}
           <hr />
           <div className="flex gap-2 justify-center ">
@@ -35,9 +36,15 @@ export const AuthModal = ({ className, open, onClose }: AuthModalProps) => {
               variant="outline"
               className="flex items-center gap-1 flex-1"
               type="button"
-              onClick={() =>
-                signIn("github", { callbackUrl: "/", redirect: true })
-              }
+              onClick={async () => {
+                try {
+                  await signIn("github", { callbackUrl: "/", redirect: true });
+                  toast.success("Вхід в акаунт успішний", { icon: "✅" });
+                } catch (error) {
+                  console.error("[LoginForm] error", error);
+                  toast.error("Не вдалося увійти", { icon: "❌" });
+                }
+              }}
             >
               <Image
                 alt="github"

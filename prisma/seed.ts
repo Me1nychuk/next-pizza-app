@@ -29,14 +29,14 @@ async function up() {
   await prisma.user.createMany({
     data: [
       {
-        fullname: "User TEST",
+        fullName: "User TEST",
         email: "user@example.com",
         password: hashSync("123456", 10),
         verified: new Date(),
         role: "USER",
       },
       {
-        fullname: "Admin TEST",
+        fullName: "Admin TEST",
         email: "admin@example.com",
         password: hashSync("123456", 10),
         verified: new Date(),
@@ -85,7 +85,7 @@ async function up() {
     data: {
       name: "Чорізо фреш",
       imageUrl:
-        "https://media.dodostatic.net/image/r:584x584/11EE7D617060472F9A5D71EB94149304.webp",
+        "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(10, 40),
