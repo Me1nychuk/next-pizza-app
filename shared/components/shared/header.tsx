@@ -11,6 +11,9 @@ import {
   SearchInput,
 } from "@/shared/components/shared";
 import { AuthModal } from "./modals/auth-modal";
+import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
   className?: string;
@@ -24,6 +27,19 @@ export const Header = ({
   hasCart = true,
 }: Props) => {
   const [authModalOpen, setAuthModalOpen] = React.useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (searchParams.has("verified")) {
+      router.replace("/");
+      setTimeout(() => {
+        toast.success("Ви підтвердили вашу пошту", {
+          icon: "✅",
+        });
+      }, 500);
+    }
+  }, []);
   return (
     <header className={cn(" border-b ", className)}>
       <Container className="flex items-center justify-between py-8 ">

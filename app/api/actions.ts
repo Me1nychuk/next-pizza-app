@@ -8,6 +8,7 @@ import { sendEmail } from "@/shared/lib";
 import { PayOrderTemplate } from "@/shared/components/shared/email-templates/pay-order";
 import { getUserSession } from "@/shared/lib/get-user-session";
 import { hashSync } from "bcrypt";
+import { VerificationUserTemplate } from "@/shared/components/shared/email-templates/verification-user";
 // import { createPayment } from "@/shared/lib/create-payment";
 
 export const createOrder = async (data: CheckoutFormValues) => {
@@ -130,7 +131,7 @@ export const registerUser = async (body: Prisma.UserCreateInput) => {
       throw new Error("Email already registered");
     }
 
-    const user = await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         email: body.email,
         fullName: body.fullName,
@@ -138,7 +139,33 @@ export const registerUser = async (body: Prisma.UserCreateInput) => {
       },
     });
 
-    return user;
+    const code = String(Math.floor((9999 / Math.random()) * 899898)).slice(
+      0,
+      4
+    );
+
+    const verificationCode = await prisma.verificationCode.create({
+      data: {
+        code,
+        userId: newUser.id,
+      },
+    });
+    if (!verificationCode) {
+      await prisma.user.delete({
+        where: {
+          id: newUser.id,
+        },
+      });
+      throw new Error("Error creating verification code");
+    }
+
+    await sendEmail(
+      newUser.email,
+      "NEXT PIZZA APP: Верифікація електронної пошти",
+      VerificationUserTemplate({
+        code,
+      })
+    );
   } catch (error) {
     console.error("[registerUser] server error", error);
   }

@@ -1,12 +1,12 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { Title } from "@/shared/components/shared";
 import { formRegisterSchema, formRegisterValues } from "./schemas";
-import Image from "next/image";
 import { FormInput } from "../../../form-components";
 import { Button } from "@/shared/components/ui";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
+import { registerUser } from "@/app/api/actions";
 
 interface RegisterFormProps {
   className?: string;
@@ -25,21 +25,16 @@ export const RegisterForm = ({ className, onClose }: RegisterFormProps) => {
 
   const onSubmit = async (data: formRegisterValues) => {
     try {
-      const resp = await signIn("credentials", {
-        ...data,
-        redirect: false,
+      const resp = await registerUser(data);
+
+      toast.success("Ви успішно зареєструвались, підтвердить свою пошту", {
+        icon: "✅",
       });
-
-      if (!resp?.ok) {
-        throw Error();
-      }
-
-      toast.success("Вхід в акаунт успішний", { icon: "✅" });
 
       onClose?.();
     } catch (error) {
       console.error("[LoginForm] error", error);
-      toast.error("Не вдалося увійти", { icon: "❌" });
+      toast.error("Не вдалося зареєструвались", { icon: "❌" });
     }
   };
   return (
@@ -68,7 +63,7 @@ export const RegisterForm = ({ className, onClose }: RegisterFormProps) => {
             className="h-12 text-base"
             type="submit"
           >
-            Ввійти
+            Зареєструватись
           </Button>
         </form>
       </FormProvider>

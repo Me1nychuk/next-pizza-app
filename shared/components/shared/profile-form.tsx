@@ -70,12 +70,12 @@ export const ProfileForm = ({ className, user }: ProfileFormProps) => {
             type="password"
           />
 
-          <Button disabled={form.formState.isSubmitting} type="submit">
+          <Button loading={form.formState.isSubmitting} type="submit">
             Оновити дані
           </Button>
 
           <Button
-            disabled={form.formState.isSubmitting}
+            loading={form.formState.isSubmitting}
             type="button"
             variant="secondary"
             onClick={onClickSignOut}
