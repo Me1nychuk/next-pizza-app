@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { BadgeAlert } from "lucide-react";
 import { Input } from "../../ui";

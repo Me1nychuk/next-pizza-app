@@ -35,5 +35,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL("/?verified", req.url));
   } catch (error) {
     console.error("[auth/verify] server error", error);
+    return NextResponse.json("Internal server error", { status: 500 });
   }
 }

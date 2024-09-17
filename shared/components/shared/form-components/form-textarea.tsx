@@ -1,3 +1,5 @@
+"use client";
+
 import { BadgeAlert } from "lucide-react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
