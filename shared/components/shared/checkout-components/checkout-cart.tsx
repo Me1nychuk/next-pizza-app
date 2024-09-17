@@ -30,11 +30,12 @@ export const CheckoutCart = ({
     <WhiteBlock
       title="1. Кошик"
       contentClassName="py-0 px-6"
-      endAdornment={
-        <div className="flex items-center gap-2 text-gray-400 cursor-pointer hover:text-gray-700 transition-all duration-300">
-          Очистити Кошик <Trash size={16} />
-        </div>
-      }
+      // !TODO: delete all goods
+      // endAdornment={
+      //   <div className="flex items-center gap-2 text-gray-400 cursor-pointer hover:text-gray-700 transition-all duration-300">
+      //     Очистити Кошик <Trash size={16} />
+      //   </div>
+      // }
     >
       {!loading &&
         items &&

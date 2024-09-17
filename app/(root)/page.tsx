@@ -2,10 +2,10 @@ import {
   Container,
   Filters,
   ProductsGroupList,
+  Stories,
   Title,
   TopBar,
 } from "@/shared/components/shared";
-import { prisma } from "@/prisma/prisma-client";
 import { Suspense } from "react";
 import { findPizza, GetSearchParams } from "@/shared/lib/find-pizza";
 
@@ -20,10 +20,12 @@ export default async function Home({
     <>
       <Container className="mt-10">
         <Title size="lg" className="font-extrabold">
-          Усі піци
+          Усі позиції
         </Title>
       </Container>
+
       <TopBar categories={categories.filter((c) => c.products.length > 0)} />
+      <Stories />
       <Container className="mt-10 pb-14">
         <div className="flex gap-[60px]">
           {/* FILTERS */}

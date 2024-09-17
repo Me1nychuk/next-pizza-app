@@ -152,6 +152,59 @@ async function up() {
       },
     },
   });
+
+  await prisma.story.createMany({
+    data: [
+      {
+        previewImageUrl:
+          "https://i.pinimg.com/564x/c7/61/e2/c761e2d88f05406c29e11103be825057.jpg",
+      },
+      {
+        previewImageUrl:
+          "https://i.pinimg.com/564x/b8/ce/04/b8ce0413a31bc040996f2168bdaa2fc2.jpg",
+      },
+      {
+        previewImageUrl:
+          "https://i.pinimg.com/564x/d4/15/3c/d4153cb1c95df230684bd4c688e79998.jpg",
+      },
+      {
+        previewImageUrl:
+          "https://i.pinimg.com/564x/fc/50/3e/fc503eb0404f90ad4214104a3314475f.jpg",
+      },
+      {
+        previewImageUrl:
+          "https://i.pinimg.com/736x/0f/a5/42/0fa542bdaa9be9c4b05febcd66ca334c.jpg",
+      },
+      {
+        previewImageUrl:
+          "https://i.pinimg.com/564x/0c/d3/6c/0cd36c504064175b12960e51b31ce6ed.jpg",
+      },
+    ],
+  });
+  await prisma.storyItem.createMany({
+    data: [
+      {
+        storyId: 1,
+        sourceUrl:
+          "https://i.pinimg.com/564x/d9/5e/e2/d95ee219e931a9e8615cf81c24bd7e1c.jpg",
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          "https://i.pinimg.com/564x/d8/f2/c0/d8f2c09002adb2a7376d4694a57b2faa.jpg",
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          "https://i.pinimg.com/564x/9c/fb/bd/9cfbbdcefde883b9d0d07dc2fb0cc4f8.jpg",
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          "https://i.pinimg.com/564x/0b/3c/82/0b3c826f34a61d3ea570bd10686fcc17.jpg",
+      },
+    ],
+  });
 }
 
 async function down() {
