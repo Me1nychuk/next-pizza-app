@@ -15,6 +15,7 @@ export default async function Home({
   searchParams: GetSearchParams;
 }) {
   const categories = await findPizza(searchParams);
+  return <></>;
 
   return (
     <>
@@ -24,8 +25,8 @@ export default async function Home({
         </Title>
       </Container>
 
-      <TopBar categories={categories.filter((c) => c.products.length > 0)} />
-      <Stories />
+      {/* <TopBar categories={categories.filter((c) => c.products.length > 0)} /> */}
+      {/* <Stories /> */}
       <Container className="mt-10 pb-14">
         <div className="flex gap-[60px]">
           {/* FILTERS */}

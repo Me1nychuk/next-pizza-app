@@ -42,14 +42,16 @@ export const Header = ({
   }, []);
   return (
     <header className={cn(" border-b ", className)}>
-      <Container className="flex items-center justify-between py-8 ">
+      <Container className="flex items-center justify-between py-8 flex-wrap max-sm:px-1 max-sm:gap-y-2">
         {/* Left part */}
         <Link href="/">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 max-sm:gap-2">
             <Image src="/logo.png" alt="Logo" width={35} height={35}></Image>
-            <div>
-              <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
-              <p className="text-base text-gray-400 leading-3">
+            <div className="">
+              <h1 className="text-2xl max-sm:text-xl uppercase font-black">
+                Next Pizza
+              </h1>
+              <p className="text-base max-sm:text-sm text-gray-400 leading-3">
                 смачніше вже нікуди
               </p>
             </div>
@@ -59,12 +61,12 @@ export const Header = ({
         {/* Center part */}
 
         {hasSearch && (
-          <div className="mx-10 flex-1">
+          <div className="mx-10 min-sm:flex-1   max-sm:order-2 max-sm:w-full">
             <SearchInput />
           </div>
         )}
         {/* Right part */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 max-sm:gap-1">
           <AuthModal
             open={authModalOpen}
             onClose={() => setAuthModalOpen(false)}

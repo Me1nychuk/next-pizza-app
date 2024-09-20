@@ -10,6 +10,18 @@ const config = {
   ],
   prefix: "",
   theme: {
+    screens: {
+      "max-xs": { max: "479.7px" },
+      "min-xs": { min: "480px" },
+      "max-sm": { max: "767.7px" },
+      "min-sm": { min: "768px" },
+      "max-md": { max: "991.7px" },
+      "min-md": { min: "992px" },
+      "max-lg": { max: "1199.7px" },
+      "min-lg": { min: "1200px" },
+      "max-xl": { max: "1399.7px" },
+      "min-xl": { min: "1400px" },
+    },
     container: {
       center: true,
       padding: "2rem",
