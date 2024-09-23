@@ -14,6 +14,11 @@ interface StoriesProps {
   className?: string;
 }
 export const Stories = ({ className }: StoriesProps) => {
+  const [screenSize, setScreenSize] = React.useState({
+    width: window.innerWidth,
+  });
+  const isMobile = screenSize.width <= 768;
+
   const [stories, setStories] = React.useState<IStory[]>([]);
   const [open, setOpen] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<IStory>();
@@ -25,10 +30,18 @@ export const Stories = ({ className }: StoriesProps) => {
     };
     fetchStories();
   }, []);
+  React.useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({ width: window.innerWidth });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const onClickStory = (story: IStory) => {
     setSelectedStory(story);
-    if (story.items.length > 0) {
+    if (story.items.length > 0 && !isMobile) {
       setOpen(true);
     }
   };
@@ -36,7 +49,7 @@ export const Stories = ({ className }: StoriesProps) => {
     <>
       <Container
         className={cn(
-          "flex items-center justify-between gap-2 my-10",
+          "flex items-center justify-between gap-2 my-10 overflow-x-auto",
           className
         )}
       >
@@ -67,22 +80,24 @@ export const Stories = ({ className }: StoriesProps) => {
                 onClick={() => setOpen(false)}
               >
                 <X
-                  className=" absolute top-0 right-0 text-white/50"
+                  className=" absolute top-4 right-0 text-white/50"
                   size={32}
                 />
               </button>
 
-              <StoriesComponent
-                onAllStoriesEnd={() => setOpen(false)}
-                stories={
-                  selectedStory?.items?.map((item) => ({
-                    url: item.sourceUrl,
-                  })) || []
-                }
-                defaultInterval={3000}
-                width={520}
-                height={800}
-              />
+              {!isMobile && (
+                <StoriesComponent
+                  onAllStoriesEnd={() => setOpen(false)}
+                  stories={
+                    selectedStory?.items?.map((item) => ({
+                      url: item.sourceUrl,
+                    })) || []
+                  }
+                  defaultInterval={3000}
+                  width={520}
+                  height={800}
+                />
+              )}
             </div>
           </div>
         )}

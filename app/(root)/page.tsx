@@ -25,7 +25,7 @@ export default async function Home({
       </Container>
 
       <TopBar categories={categories.filter((c) => c.products.length > 0)} />
-      {/*  <Stories /> */}
+      <Stories />
       <Container className="mt-10 pb-14">
         <div className="flex gap-[60px] max-sm:flex-col">
           {/* FILTERS */}
