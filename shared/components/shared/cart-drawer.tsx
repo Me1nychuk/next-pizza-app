@@ -41,7 +41,7 @@ export const CartDrawer = ({ children, className }: CartDrawerProps) => {
     <>
       <Sheet>
         <SheetTrigger asChild>{children}</SheetTrigger>
-        <SheetContent className="w-[400px] flex flex-col justify-between pb-0 bg-[#F4F1EE]">
+        <SheetContent className="w-[400px] max-xs:w-full flex flex-col justify-between pb-0 bg-[#F4F1EE]">
           {items.length > 0 && (
             <SheetHeader>
               <SheetTitle className="text-xl ">

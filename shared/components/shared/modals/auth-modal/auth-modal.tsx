@@ -24,7 +24,12 @@ export const AuthModal = ({ className, open, onClose }: AuthModalProps) => {
   return (
     <>
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className={cn("p-10 w-[450px]  bg-white ", className)}>
+        <DialogContent
+          className={cn(
+            "p-10 max-w-[450px] w-[450px] max-sm:w-[95%]  bg-white ",
+            className
+          )}
+        >
           {type === "login" ? (
             <LoginForm onClose={handleClose} />
           ) : (

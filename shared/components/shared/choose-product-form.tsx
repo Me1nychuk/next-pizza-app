@@ -22,7 +22,12 @@ export const ChooseProductForm = ({
 }: ChooseProductFormProps) => {
   return (
     <>
-      <div className={cn("flex flex-1", className)}>
+      <div
+        className={cn(
+          "flex flex-1 max-md:flex-col max-md:overflow-y-auto",
+          className
+        )}
+      >
         <div
           className={cn(
             "flex items-center justify-center flex-1 relative  w-full",
@@ -35,12 +40,12 @@ export const ChooseProductForm = ({
             width={350}
             height={350}
             className={cn(
-              "relative left-2 top-2 transition-all z-10 duration-300 "
+              "relative left-2 top-2 transition-all z-10 duration-300 max-md:w-[335px] max-md:h-[335px] max-md:static max-md:z-0"
             )}
           />
         </div>
-        <div className="w-[490px] bg-[#f5f4f4] p-7">
-          <Title size="md" className="font-bold mb-[330px] ">
+        <div className="min-md:max-w-[490px] flex-1 max-md:w-full bg-[#f5f4f4] p-7">
+          <Title size="md" className="font-bold  mb-[330px] max-md:mb-5 ">
             {name}
           </Title>
 

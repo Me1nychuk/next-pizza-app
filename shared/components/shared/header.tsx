@@ -45,13 +45,19 @@ export const Header = ({
       <Container className="flex items-center justify-between py-8 flex-wrap max-sm:px-1 max-sm:gap-y-2">
         {/* Left part */}
         <Link href="/">
-          <div className="flex items-center gap-4 max-sm:gap-2">
-            <Image src="/logo.png" alt="Logo" width={35} height={35}></Image>
+          <div className="flex items-center gap-4 max-sm:gap-1">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={35}
+              height={35}
+              className="max-xs:w-6"
+            ></Image>
             <div className="">
-              <h1 className="text-2xl max-sm:text-xl uppercase font-black">
+              <h1 className="text-2xl max-sm:text-xl max-xs:!text-lg uppercase font-black">
                 Next Pizza
               </h1>
-              <p className="text-base max-sm:text-sm text-gray-400 leading-3">
+              <p className="text-base max-sm:text-sm max-xs:!text-xs text-gray-400 leading-3">
                 смачніше вже нікуди
               </p>
             </div>

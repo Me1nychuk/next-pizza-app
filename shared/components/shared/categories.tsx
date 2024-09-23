@@ -16,7 +16,7 @@ export const Categories = ({ className, categories }: Props) => {
     <>
       <div
         className={cn(
-          "inline-flex items-center gap-1 bg-gray-50 rounded-2xl p-1",
+          "inline-flex items-center gap-1 bg-gray-50 rounded-2xl p-1 flex-wrap",
           className
         )}
       >

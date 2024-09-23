@@ -24,7 +24,7 @@ export const ProductsGroupList = ({
   const setActiveId = useCategoryStore((state) => state.setActiveId);
   const intersectionRef = React.useRef(null);
   const intersection = useIntersection(intersectionRef, {
-    threshold: 0.4,
+    threshold: 0.3,
   });
 
   useEffect(() => {
@@ -38,7 +38,12 @@ export const ProductsGroupList = ({
         {title}
       </Title>
 
-      <div className={cn(" grid grid-cols-3 gap-[50px]", listClassName)}>
+      <div
+        className={cn(
+          " grid grid-cols-3  max-md:grid-cols-2 max-sm:!grid-cols-1 gap-[50px]  max-lg:gap-[20px] max-sm:gap-5",
+          listClassName
+        )}
+      >
         {items.map((item, i) => (
           <ProductCard
             key={item.id}

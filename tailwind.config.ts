@@ -11,6 +11,8 @@ const config = {
   prefix: "",
   theme: {
     screens: {
+      "max-xxs": { max: "374.7px" },
+      "min-xxs": { min: "375px" },
       "max-xs": { max: "479.7px" },
       "min-xs": { min: "480px" },
       "max-sm": { max: "767.7px" },

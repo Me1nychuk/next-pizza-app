@@ -28,7 +28,7 @@ export const ProductCard = ({
         <Link href={"/products/" + id}>
           <div className="flex items-center justify-center p-6 bg-secondary rounded-lg h-[260px]">
             <Image
-              className="h-[215px] w-[215px]"
+              className="h-[215px] w-[215px] object-contain"
               src={imageUrl}
               alt={name}
               width={215}
@@ -43,7 +43,7 @@ export const ProductCard = ({
           <p className="mb-3 text-sm text-gray-400">
             {ingredients?.map((ingredient) => ingredient.name).join(", ")}
           </p>
-          <div className="flex justify-between ">
+          <div className="flex justify-between items-center">
             <span className="text-[20px]">
               від <b>{price} ₴</b>
             </span>

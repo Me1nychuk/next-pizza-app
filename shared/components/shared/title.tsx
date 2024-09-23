@@ -19,12 +19,12 @@ export function Title({ size = "sm", className, children }: Props) {
   } as const;
 
   const mapClassNameBySize = {
-    xs: "text-[16px]",
-    sm: "text-[22px]",
-    md: "text-[26px]",
-    lg: "text-[32px]",
-    xl: "text-[40px]",
-    "2xl": "text-[48px]",
+    xs: "text-[16px] max-sm:text-[14px]",
+    sm: "text-[22px] max-sm:text-[18px]",
+    md: "text-[26px] max-sm:text-[22px]",
+    lg: "text-[32px] max-sm:text-[28px]",
+    xl: "text-[40px] max-sm:text-[36px]",
+    "2xl": "text-[48px] max-sm:text-[44px]",
   } as const;
 
   return React.createElement(

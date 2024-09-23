@@ -58,7 +58,7 @@ export const Filters = ({ className }: Props) => {
         />
 
         {/* Price filter */}
-        <div className="mt-6 border-y border-y-neutral-100 pt-6 pb-7">
+        <div className="mt-6 border-y border-y-neutral-100 pt-6 pb-7 max-sm:px-4">
           <p className="text-base font-bold mb-3">Ціна від і до:</p>
           <div className="flex gap-3 mb-5">
             <Input

@@ -58,13 +58,13 @@ const RangeSlider = React.forwardRef(
         )}
         {...props}
       >
-        <SliderPrimitive.Track className="relative h-1 w-full grow overflow-hidden rounded-full bg-primary/20">
+        <SliderPrimitive.Track className="relative h-1 w-full grow overflow-hidden rounded-full bg-primary/20 ">
           <SliderPrimitive.Range className="absolute h-full bg-primary" />
         </SliderPrimitive.Track>
         {localValues.map((value, index) => (
           <React.Fragment key={index}>
             <div
-              className="absolute text-center"
+              className="absolute text-center max-sm:hidden"
               style={{
                 left: `calc(${((value - min) / (max - min)) * 100}% + 0px)`,
                 top: `10px`,

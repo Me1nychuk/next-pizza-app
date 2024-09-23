@@ -18,7 +18,7 @@ export const TopBar = ({ className, categories }: Props) => {
       >
         <Container className="flex items-center justify-between">
           <Categories categories={categories} />
-          <SortPopup />
+          {/* <SortPopup /> */}
         </Container>
       </div>
     </>

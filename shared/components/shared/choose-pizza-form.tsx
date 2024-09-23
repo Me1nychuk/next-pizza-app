@@ -59,10 +59,15 @@ export const ChoosePizzaForm = ({
 
   return (
     <>
-      <div className={cn("flex flex-1", className)}>
+      <div
+        className={cn(
+          "flex flex-1 max-md:flex-col max-md:overflow-y-auto",
+          className
+        )}
+      >
         <PizzaImage src={imageUrl} alt={name} size={size} />
 
-        <div className="w-[490px] bg-[#f5f4f4] p-7">
+        <div className="min-md:max-w-[490px] flex-1 max-md:w-full bg-[#f5f4f4] p-7">
           <Title size="md" className="font-bold mb-1">
             {name}
           </Title>
@@ -80,8 +85,8 @@ export const ChoosePizzaForm = ({
               onClick={(value) => setType(Number(value) as PizzaType)}
             />
           </div>
-          <div className=" bg-gray-50 p-1 rounded-md h-[420px] overflow-auto scrollbar">
-            <div className="grid grid-cols-3 gap-3">
+          <div className=" bg-gray-50 p-1 rounded-md max-h-[420px] overflow-auto scrollbar">
+            <div className="flex flex-wrap gap-3 max-xs:gap-2">
               {ingredients.map((ingredient, i) => (
                 <IngredientItem
                   key={ingredient.id}

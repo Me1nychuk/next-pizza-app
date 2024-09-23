@@ -22,7 +22,7 @@ export const ChooseProductModal = ({
       <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
         <DialogContent
           className={cn(
-            "p-0 max-w-[1060px] w-[1060px] min-h-[500px] bg-white overflow-hidden",
+            "p-0 max-w-[1060px] w-[1060px] max-lg:w-[90%] max-lg:h-[90%] min-h-[500px] bg-white overflow-hidden",
             className
           )}
         >
