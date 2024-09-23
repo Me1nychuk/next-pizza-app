@@ -48,7 +48,7 @@ export const FormInput = ({
         )}
         <div className="relative">
           <Input
-            className="h-12 text-base"
+            className="h-12 text-base max-sm:text-sm"
             placeholder={placeholder}
             {...register(name)}
             {...props}

@@ -19,7 +19,12 @@ export const CheckoutSidebar = ({
   loading,
 }: CheckoutSidebarProps) => {
   return (
-    <div className={cn(" w-[450px] bg-white rounded-3xl p-3", className)}>
+    <div
+      className={cn(
+        " w-[450px] max-lg:w-full bg-white rounded-3xl p-3",
+        className
+      )}
+    >
       <WhiteBlock className="p-6 sticky top-4" contentClassName="p-0">
         <div className="">
           <div className="flex flex-col gap-1">

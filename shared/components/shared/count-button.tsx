@@ -18,7 +18,7 @@ export const CountButton = ({
     <>
       <div
         className={cn(
-          "inline-flex items-center gap-3 justify-between   ",
+          "inline-flex items-center gap-3 max-sm:gap-1 justify-between   ",
           className
         )}
       >

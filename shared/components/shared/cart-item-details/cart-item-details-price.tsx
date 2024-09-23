@@ -11,7 +11,14 @@ export const CartItemDetailsPrice = ({
 }: CartItemDetailsPriceProps) => {
   return (
     <>
-      <h2 className={cn(className, "font-bold")}>{value} ₴</h2>
+      <h2
+        className={cn(
+          className,
+          "font-bold whitespace-nowrap max-sm:text-xs max-sm:w-[40px]"
+        )}
+      >
+        {value} ₴
+      </h2>
     </>
   );
 };

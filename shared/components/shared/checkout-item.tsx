@@ -28,7 +28,7 @@ export const CheckoutItem = ({
     <>
       <div
         className={cn(
-          "flex items-center bg-white p-8  gap-5 border-y border-y-neutral-100",
+          "flex items-center bg-white p-8 max-sm:p-1 gap-5 max-sm:gap-2 border-y border-y-neutral-100",
           className,
           {
             "opacity-50 cursor-not-allowed pointer-events-none": disabled,
@@ -37,7 +37,7 @@ export const CheckoutItem = ({
       >
         <Cart.Image src={imageUrl} />
 
-        <div className=" flex-1">
+        <div className=" flex-1 min-w-[100px]">
           <Cart.Info name={name} details={details} />
         </div>
         <Cart.Price value={price} />

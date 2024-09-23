@@ -18,7 +18,7 @@ export const WhiteBlock = ({
   title,
 }: WhiteBlockProps) => {
   return (
-    <div className={cn("bg-white rounded-3xl", className)}>
+    <div className={cn("bg-white rounded-3xl overflow-hidden", className)}>
       {title && (
         <div className="flex items-center justify-between px-8 py-6 border-b border-b-gray-100">
           <Title className="font-extrabold " size="lg">

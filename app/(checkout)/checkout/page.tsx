@@ -85,8 +85,8 @@ const Page: React.FC = () => {
 
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex items-start gap-10">
-              <div className="flex flex-col gap-10 flex-1 mb-20">
+            <div className="flex items-start gap-10 max-lg:flex-col">
+              <div className="flex flex-col gap-10 flex-1 mb-20 max-lg:mb-0 max-lg:max-w-full">
                 <CheckoutCart
                   items={items}
                   onClickCountButton={onClickCountButton}

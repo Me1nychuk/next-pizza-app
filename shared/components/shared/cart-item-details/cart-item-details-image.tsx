@@ -15,7 +15,10 @@ export const CartItemDetailsImage = ({
       <Image
         src={src}
         alt=""
-        className={cn("w-[65px] h-[65px]", className)}
+        className={cn(
+          "w-[65px] h-[65px] max-sm:h-[40px] max-sm:w-[40px]",
+          className
+        )}
         width={65}
         height={65}
       />

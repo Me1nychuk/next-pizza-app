@@ -14,7 +14,7 @@ export const CheckoutPersonalForm = ({
       contentClassName=""
       className={className}
     >
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-5 max-sm:grid-cols-1">
         <FormInput name="firstName" type="text" placeholder="Ваше ім'я" />
         <FormInput name="secondName" type="text" placeholder="Ваше прізвище" />
         <FormInput
